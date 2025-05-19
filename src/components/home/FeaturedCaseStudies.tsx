@@ -7,13 +7,21 @@ import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Container } from '@/components/shared/container';
 import type { CaseStudy } from '@/lib/data'; 
 import { ArrowRight } from 'lucide-react';
-
-// Using the main caseStudiesData which now uses placehold.co
 import { caseStudiesData } from '@/lib/data'; 
+import { fetchPexelsImage } from '@/services/pexels';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
-const featuredCaseStudiesData = caseStudiesData.slice(0, 2); // Take first two for featured section
+export async function FeaturedCaseStudies() {
+  const featuredCaseStudiesPromises = caseStudiesData.slice(0, 2).map(async (study) => {
+    const pexelsQuery = study.imageHint || study.industry.toLowerCase().split(' ')[0] || 'business highlight';
+    const pexelsImageUrl = await fetchPexelsImage(pexelsQuery, 600, 338);
+    return {
+      ...study,
+      imageUrl: pexelsImageUrl || study.imageUrl || FALLBACK_IMAGE_URL,
+    };
+  });
+  const featuredCaseStudies = await Promise.all(featuredCaseStudiesPromises);
 
-export function FeaturedCaseStudies() {
   return (
     <section className="section-padding bg-secondary/30">
       <Container>
@@ -21,13 +29,13 @@ export function FeaturedCaseStudies() {
           See how we've helped businesses like yours achieve remarkable results through strategic digital marketing.
         </SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {featuredCaseStudiesData.map((study) => {
+          {featuredCaseStudies.map((study) => {
             const imageHint = study.imageHint || `${study.industry.toLowerCase()} success`;
             return (
               <Card key={study.id} className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-accent border border-transparent">
                 <div className="aspect-video overflow-hidden group">
                   <Image
-                    src={study.imageUrl} // This will be from placehold.co via caseStudiesData
+                    src={study.imageUrl}
                     alt={study.title}
                     width={600}
                     height={338}

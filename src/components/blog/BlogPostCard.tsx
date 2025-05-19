@@ -7,21 +7,23 @@ import type { BlogPost } from '@/lib/data';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
 interface BlogPostCardProps {
-  post: BlogPost;
+  post: BlogPost; // Expects imageUrl to be potentially Pexels URL
 }
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
+  const imageUrl = post.imageUrl || FALLBACK_IMAGE_URL;
   return (
     <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full transform hover:-translate-y-1 hover:border-accent border border-transparent">
-      {post.imageUrl && (
+      {imageUrl && (
         <Link href={`/blog/${post.slug}`} className="block aspect-video overflow-hidden group">
           <Image
-            src={post.imageUrl} // Will use placehold.co from data.ts
+            src={imageUrl}
             alt={post.title}
             width={600}
-            height={338} // 16:9 aspect ratio
+            height={338} 
             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
             data-ai-hint={post.imageHint || "blog technology"}
           />
@@ -39,7 +41,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         <p className="text-muted-foreground text-sm mb-3">{post.excerpt}</p>
         {post.tags && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2">
-            {post.tags.slice(0, 3).map(tag => ( // Show max 3 tags
+            {post.tags.slice(0, 3).map(tag => ( 
               <Badge key={tag} variant="secondary" className="text-xs hover:bg-accent/20 hover:text-accent transition-colors">{tag}</Badge>
             ))}
           </div>

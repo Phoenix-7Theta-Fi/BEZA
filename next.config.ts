@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co', // Ensure placehold.co is whitelisted
+        hostname: 'images.pexels.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co', // Keep as a fallback
         pathname: '/**',
       }
     ],

@@ -1,3 +1,4 @@
+
 import { Container } from '@/components/shared/container';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { ServiceDetail } from '@/components/services/ServiceDetail';
@@ -6,6 +7,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
+import { fetchPexelsImage } from '@/services/pexels';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
 interface ServicePageParams {
   slug: string;
@@ -35,12 +38,21 @@ export async function generateMetadata({ params }: ServicePageProps) {
 }
 
 
-export default function SingleServicePage({ params }: ServicePageProps) {
+export default async function SingleServicePage({ params }: ServicePageProps) {
   const service = servicesData.find(s => s.slug === params.slug);
 
   if (!service) {
     notFound();
   }
+
+  const pexelsQuery = service.title.toLowerCase() + " concept" || "business service";
+  const pexelsImageUrl = await fetchPexelsImage(pexelsQuery, 600, 400);
+  // Add imageUrl to service object if it doesn't exist for fallback in ServiceDetail
+  const serviceWithImage = {
+      ...service,
+      imageUrl: service.imageUrl || FALLBACK_IMAGE_URL // Ensure there's a fallback
+  }
+
 
   return (
     <div className="section-padding">
@@ -56,8 +68,9 @@ export default function SingleServicePage({ params }: ServicePageProps) {
           title={service.title}
           subtitle="Our Service"
         />
-        <ServiceDetail service={service} />
+        <ServiceDetail service={serviceWithImage} pexelsImageUrl={pexelsImageUrl || undefined} />
       </Container>
     </div>
   );
 }
+

@@ -1,19 +1,20 @@
 
-import type { LucideIcon } from 'lucide-react';
+// It's beneficial to add an optional imageUrl to Service interface if it might be missing.
+// For Pexels integration, the `imageUrl` here will act as a fallback.
+// The actual display URL will be fetched from Pexels based on `imageHint` or other data.
 
 export interface Service {
   id: string;
   slug: string;
   title: string;
-  iconName: string; // Corresponds to key in iconMap or Lucide icon name
+  iconName: string; 
   shortDescription: string;
   longDescription: string;
   benefits: string[];
   process?: { step: string; description: string }[];
   cta: { text: string; link: string };
-  // imageUrl and imageHint added for consistency, though not used in ServiceCard directly
-  // but could be used if we show images on the main services page.
-  // For ServiceDetail, the image is handled there.
+  imageUrl?: string; // Added to hold fallback placeholder
+  imageHint?: string; // Added for Pexels query
 }
 
 export interface CaseStudy {
@@ -22,13 +23,13 @@ export interface CaseStudy {
   title: string;
   clientName: string;
   industry: string;
-  imageUrl: string; // Now placehold.co
-  imageHint: string; // Generic hint
+  imageUrl: string; // Will be replaced by Pexels URL or fallback to this
+  imageHint: string; 
   challenge: string;
   solution: string;
   results: { metric: string; value: string }[];
-  summary: string; // Short summary for cards
-  servicesUsed: string[]; // e.g., ['Brand Building', 'Data Analysis']
+  summary: string; 
+  servicesUsed: string[]; 
 }
 
 export interface BlogPost {
@@ -36,11 +37,11 @@ export interface BlogPost {
   slug: string;
   title: string;
   author: string;
-  date: string; // ISO string
-  imageUrl?: string; // Now placehold.co
-  imageHint?: string; // Generic hint
+  date: string; 
+  imageUrl?: string; // Will be replaced by Pexels URL or fallback to this
+  imageHint?: string; 
   excerpt: string;
-  content: string; // Markdown or HTML content
+  content: string; 
   tags: string[];
 }
 
@@ -65,6 +66,8 @@ export const servicesData: Service[] = [
         { step: 'Brand Launch & Activation', description: 'Rolling out your new brand across all touchpoints.' },
     ],
     cta: { text: 'Build Your Brand with Us', link: '/contact?service=brand-building' },
+    imageUrl: 'https://placehold.co/600x400.png?text=Brand+Building',
+    imageHint: 'brand identity design'
   },
   {
     id: '2',
@@ -80,6 +83,8 @@ export const servicesData: Service[] = [
       'Valuable insights into customer preferences.',
     ],
     cta: { text: 'Engage Your Audience Today', link: '/contact?service=audience-engagement' },
+    imageUrl: 'https://placehold.co/600x400.png?text=Audience+Engagement',
+    imageHint: 'social media community'
   },
   {
     id: '3',
@@ -95,6 +100,8 @@ export const servicesData: Service[] = [
       'Continuous improvement of campaign effectiveness.',
     ],
     cta: { text: 'Leverage Your Data Now', link: '/contact?service=data-analysis' },
+    imageUrl: 'https://placehold.co/600x400.png?text=Data+Analysis',
+    imageHint: 'marketing data charts'
   },
   {
     id: '4',
@@ -110,6 +117,8 @@ export const servicesData: Service[] = [
       'Improved conversion rates and customer acquisition.',
     ],
     cta: { text: 'Amplify Your Success', link: '/contact?service=amplification-strategies' },
+    imageUrl: 'https://placehold.co/600x400.png?text=Amplification',
+    imageHint: 'digital advertising growth'
   },
 ];
 
@@ -120,7 +129,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Boosting E-commerce Sales by 150% for FashionRetail Co.',
     clientName: 'FashionRetail Co.',
     industry: 'E-commerce / Fashion',
-    imageUrl: 'https://placehold.co/800x450.png',
+    imageUrl: 'https://placehold.co/800x450.png?text=Ecomm+Success', // Fallback
     imageHint: 'ecommerce success',
     challenge: 'FashionRetail Co. was struggling with stagnant online sales and low brand visibility in a competitive market. Their previous marketing efforts lacked clear direction and ROI.',
     solution: 'BEZA developed a multi-channel strategy focusing on SEO optimization for their e-commerce platform, targeted social media advertising campaigns (Facebook & Instagram), and compelling content marketing. We also implemented a conversion rate optimization (CRO) plan for their product pages.',
@@ -139,7 +148,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Tripling Qualified Leads for TechSolutions Inc.',
     clientName: 'TechSolutions Inc.',
     industry: 'SaaS / B2B Technology',
-    imageUrl: 'https://placehold.co/800x450.png',
+    imageUrl: 'https://placehold.co/800x450.png?text=SaaS+Leads', // Fallback
     imageHint: 'saas growth',
     challenge: 'TechSolutions Inc., a B2B SaaS provider, faced challenges in generating a consistent flow of qualified leads. Their existing lead generation funnel was inefficient and costly.',
     solution: 'Our team revamped their content marketing strategy by creating high-value downloadable assets (eBooks, whitepapers), optimizing landing pages for conversion, and implementing a sophisticated email nurturing sequence. We also utilized LinkedIn Ads for targeted B2B outreach.',
@@ -161,7 +170,7 @@ export const blogPostsData: BlogPost[] = [
     title: 'The Future of Digital Marketing: Trends to Watch in 2024',
     author: 'Jane Doe, Head of Strategy @ BEZA',
     date: '2024-01-15T10:00:00Z',
-    imageUrl: 'https://placehold.co/800x400.png',
+    imageUrl: 'https://placehold.co/800x400.png?text=Marketing+Trends', // Fallback
     imageHint: 'marketing trends',
     excerpt: 'Digital marketing is constantly evolving. Discover the key trends that will shape the landscape in 2024 and how your business can prepare for success.',
     content: `
@@ -182,7 +191,7 @@ export const blogPostsData: BlogPost[] = [
     title: 'Unlocking the Power of Data Analytics in Your Marketing',
     author: 'John Smith, Data Lead @ BEZA',
     date: '2024-02-20T14:30:00Z',
-    imageUrl: 'https://placehold.co/800x400.png',
+    imageUrl: 'https://placehold.co/800x400.png?text=Data+Analytics', // Fallback
     imageHint: 'data analytics',
     excerpt: 'Data is more than just numbers; it\'s the key to understanding your customers and optimizing your campaigns. Learn how to effectively use data analytics.',
     content: `
@@ -200,3 +209,4 @@ export const blogPostsData: BlogPost[] = [
     tags: ['Data Analytics', 'Marketing Strategy', 'KPIs', 'Optimization'],
   },
 ];
+

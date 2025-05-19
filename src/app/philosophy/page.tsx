@@ -1,13 +1,14 @@
 
 import { Container } from '@/components/shared/container';
 import { SectionTitle } from '@/components/shared/SectionTitle';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BuildIcon } from '@/components/icons/BuildIcon';
 import { EngageIcon } from '@/components/icons/EngageIcon';
 import { ZoomIcon } from '@/components/icons/ZoomIcon';
 import { AmplifyIcon } from '@/components/icons/AmplifyIcon';
 import Image from 'next/image';
 import type { ReactElement } from 'react';
+import { fetchPexelsImage } from '@/services/pexels';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
 interface PhilosophyDetail {
   icon: ReactElement;
@@ -15,12 +16,13 @@ interface PhilosophyDetail {
   letter: string;
   tagline: string;
   details: string[];
-  imageUrl: string; // Now placehold.co
+  imageUrl: string; // Original placeholder, will be replaced by Pexels
   imageAlt: string;
   dataAiHint: string;
+  pexelsImageUrl?: string; // To store fetched URL
 }
 
-const philosophyDetails: PhilosophyDetail[] = [
+const philosophyDetailsData: Omit<PhilosophyDetail, 'pexelsImageUrl'>[] = [
   {
     icon: <BuildIcon className="h-12 w-12 text-accent" />,
     title: 'Build',
@@ -83,7 +85,16 @@ const philosophyDetails: PhilosophyDetail[] = [
   },
 ];
 
-export default function PhilosophyPage() {
+export default async function PhilosophyPage() {
+  const philosophyDetailsWithPexelsPromises = philosophyDetailsData.map(async (step) => {
+    const pexelsImageUrl = await fetchPexelsImage(step.dataAiHint, 600, 400);
+    return {
+      ...step,
+      pexelsImageUrl: pexelsImageUrl || step.imageUrl || FALLBACK_IMAGE_URL,
+    };
+  });
+  const philosophyDetails = await Promise.all(philosophyDetailsWithPexelsPromises);
+
   return (
     <div className="section-padding">
       <Container>
@@ -99,7 +110,7 @@ export default function PhilosophyPage() {
             <section key={step.title} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 lg:gap-12 group`}>
               <div className="md:w-1/2 overflow-hidden rounded-lg shadow-xl">
                 <Image
-                  src={step.imageUrl}
+                  src={step.pexelsImageUrl!}
                   alt={step.imageAlt}
                   width={600}
                   height={400}
@@ -110,7 +121,7 @@ export default function PhilosophyPage() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   {step.icon}
-                  <h3 className="ml-4 text-3xl font-bold text-foreground">
+                  <h3 className="ml-4 text-3xl font-bold text-foreground hover:text-accent transition-colors">
                     <span className="text-accent">{step.letter}</span> - {step.title}
                   </h3>
                 </div>

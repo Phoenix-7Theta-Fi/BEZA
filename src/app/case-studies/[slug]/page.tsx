@@ -1,6 +1,5 @@
 
 import { Container } from '@/components/shared/container';
-import { SectionTitle } from '@/components/shared/SectionTitle';
 import { caseStudiesData } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -10,7 +9,8 @@ import { CheckSquare, TrendingUp, Target } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
-
+import { fetchPexelsImage } from '@/services/pexels';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
 interface CaseStudyPageParams {
   slug: string;
@@ -39,15 +39,18 @@ export async function generateMetadata({ params }: CaseStudyPageProps) {
   };
 }
 
-export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
-  const study = caseStudiesData.find(s => s.slug === params.slug);
+export default async function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
+  const studyData = caseStudiesData.find(s => s.slug === params.slug);
 
-  if (!study) {
+  if (!studyData) {
     notFound();
   }
   
-  // Using the imageHint from data.ts, which is now static
-  const imageHint = study.imageHint || `${study.industry.split(' ')[0].toLowerCase()} results`;
+  const pexelsQuery = studyData.imageHint || studyData.industry.split(' ')[0].toLowerCase() || 'business results';
+  const pexelsImageUrl = await fetchPexelsImage(pexelsQuery, 1200, 675);
+  const finalImageUrl = pexelsImageUrl || studyData.imageUrl || FALLBACK_IMAGE_URL;
+  const imageHint = studyData.imageHint || `${studyData.industry.split(' ')[0].toLowerCase()} results`;
+
 
   return (
     <div className="section-padding">
@@ -61,12 +64,12 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
         </div>
         <article>
           <header className="mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{study.title}</h1>
-            <p className="text-xl text-muted-foreground">Client: <span className="font-semibold text-accent">{study.clientName}</span> | Industry: <span className="font-semibold text-accent">{study.industry}</span></p>
-            {study.servicesUsed && study.servicesUsed.length > 0 && (
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 hover:text-accent transition-colors">{studyData.title}</h1>
+            <p className="text-xl text-muted-foreground">Client: <span className="font-semibold text-accent">{studyData.clientName}</span> | Industry: <span className="font-semibold text-accent">{studyData.industry}</span></p>
+            {studyData.servicesUsed && studyData.servicesUsed.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 <span className="text-sm font-medium text-muted-foreground">Services Used:</span>
-                {study.servicesUsed.map(service => (
+                {studyData.servicesUsed.map(service => (
                   <Badge key={service} variant="outline">{service}</Badge>
                 ))}
               </div>
@@ -74,10 +77,10 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
           </header>
 
           <Image
-            src={study.imageUrl} // This will come from caseStudiesData, now placehold.co
-            alt={study.title}
+            src={finalImageUrl}
+            alt={studyData.title}
             width={1200}
-            height={675} // 16:9 aspect ratio
+            height={675}
             className="rounded-lg shadow-xl mb-12 object-cover w-full max-h-[500px] transform hover:scale-105 transition-transform duration-300"
             data-ai-hint={imageHint}
             priority
@@ -90,7 +93,7 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
                 <Target className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">{study.challenge}</p>
+                <p className="text-muted-foreground">{studyData.challenge}</p>
               </CardContent>
             </Card>
             <Card className="transition-shadow hover:shadow-lg">
@@ -99,7 +102,7 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
                 <CheckSquare className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                 <p className="text-muted-foreground">{study.solution}</p>
+                 <p className="text-muted-foreground">{studyData.solution}</p>
               </CardContent>
             </Card>
             <Card className="bg-accent/10 border-accent/30 transition-shadow hover:shadow-lg">
@@ -109,7 +112,7 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-1">
-                  {study.results.map(result => (
+                  {studyData.results.map(result => (
                     <li key={result.metric} className="text-sm">
                       <span className="font-semibold text-accent">{result.value}</span>
                       <span className="text-muted-foreground ml-1">{result.metric}</span>

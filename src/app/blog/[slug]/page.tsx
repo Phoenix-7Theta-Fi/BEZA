@@ -9,6 +9,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft } from 'lucide-react';
+import { fetchPexelsImage } from '@/services/pexels';
+import { FALLBACK_IMAGE_URL } from '@/lib/config';
 
 interface BlogPostPageParams {
   slug: string;
@@ -37,16 +39,23 @@ export async function generateMetadata({ params }: BlogPostPageProps) {
   };
 }
 
+export default async function SingleBlogPostPage({ params }: BlogPostPageProps) {
+  const postData = blogPostsData.find(p => p.slug === params.slug);
 
-export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
-  const post = blogPostsData.find(p => p.slug === params.slug);
-
-  if (!post) {
+  if (!postData) {
     notFound();
   }
 
-  const authorInitials = post.author.split(' ').map(n => n[0]).join('').toUpperCase();
-  const avatarKeywords = "author profile"; // Used for data-ai-hint
+  const pexelsQuery = postData.imageHint || postData.tags?.[0] || 'article cover';
+  const pexelsImageUrl = await fetchPexelsImage(pexelsQuery, 1200, 675);
+  const finalImageUrl = pexelsImageUrl || postData.imageUrl || FALLBACK_IMAGE_URL;
+  
+  const authorPexelsQuery = "professional portrait";
+  const authorImageUrl = await fetchPexelsImage(authorPexelsQuery, 100, 100) || 'https://placehold.co/100x100.png';
+
+
+  const authorInitials = postData.author.split(' ').map(n => n[0]).join('').toUpperCase();
+  const avatarKeywords = "author profile";
 
   return (
     <div className="section-padding">
@@ -60,42 +69,42 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
         </div>
         <article className="max-w-3xl mx-auto">
           <header className="mb-8">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">{post.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight hover:text-accent transition-colors">{postData.title}</h1>
             <div className="flex items-center space-x-3 text-sm text-muted-foreground">
               <Avatar className="h-10 w-10">
-                <AvatarImage src="https://placehold.co/100x100.png" alt={post.author} data-ai-hint={avatarKeywords} />
+                <AvatarImage src={authorImageUrl} alt={postData.author} data-ai-hint={avatarKeywords} className="object-cover"/>
                 <AvatarFallback>{authorInitials}</AvatarFallback>
               </Avatar>
               <div>
-                <span>By <span className="font-semibold text-foreground">{post.author}</span></span>
+                <span>By <span className="font-semibold text-foreground">{postData.author}</span></span>
                 <span className="mx-1">&bull;</span>
-                <span>{format(new Date(post.date), 'MMMM d, yyyy')}</span>
+                <span>{format(new Date(postData.date), 'MMMM d, yyyy')}</span>
               </div>
             </div>
-            {post.tags && post.tags.length > 0 && (
+            {postData.tags && postData.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
-                {post.tags.map(tag => (
+                {postData.tags.map(tag => (
                   <Badge key={tag} variant="secondary" className="hover:bg-accent/20 hover:text-accent transition-colors">{tag}</Badge>
                 ))}
               </div>
             )}
           </header>
 
-          {post.imageUrl && (
+          {finalImageUrl && (
             <Image
-              src={post.imageUrl} // This will come from blogPostsData, now placehold.co
-              alt={post.title}
+              src={finalImageUrl}
+              alt={postData.title}
               width={1200}
               height={675}
               className="rounded-lg shadow-lg mb-8 object-cover w-full aspect-video"
-              data-ai-hint={post.imageHint || "blog cover"}
+              data-ai-hint={postData.imageHint || "blog cover"}
               priority
             />
           )}
           
           <div 
             className="prose prose-lg max-w-none dark:prose-invert text-foreground prose-headings:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-strong:text-foreground"
-            dangerouslySetInnerHTML={{ __html: post.content }} 
+            dangerouslySetInnerHTML={{ __html: postData.content }} 
           />
           
         </article>
