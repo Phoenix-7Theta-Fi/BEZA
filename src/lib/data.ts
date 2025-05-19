@@ -1,3 +1,4 @@
+
 import type { LucideIcon } from 'lucide-react';
 
 export interface Service {
@@ -114,7 +115,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Boosting E-commerce Sales by 150% for FashionRetail Co.',
     clientName: 'FashionRetail Co.',
     industry: 'E-commerce / Fashion',
-    imageUrl: 'https://source.unsplash.com/random/800x450?ecommerce,fashion,success',
+    imageUrl: 'https://source.unsplash.com/random/800x450?ecommerce,success', // Changed from ecommerce,fashion,success
     challenge: 'FashionRetail Co. was struggling with stagnant online sales and low brand visibility in a competitive market. Their previous marketing efforts lacked clear direction and ROI.',
     solution: 'BEZA developed a multi-channel strategy focusing on SEO optimization for their e-commerce platform, targeted social media advertising campaigns (Facebook & Instagram), and compelling content marketing. We also implemented a conversion rate optimization (CRO) plan for their product pages.',
     results: [
@@ -132,7 +133,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Tripling Qualified Leads for TechSolutions Inc.',
     clientName: 'TechSolutions Inc.',
     industry: 'SaaS / B2B Technology',
-    imageUrl: 'https://source.unsplash.com/random/800x450?saas,technology,success',
+    imageUrl: 'https://source.unsplash.com/random/800x450?saas,growth', // Changed from saas,technology,success
     challenge: 'TechSolutions Inc., a B2B SaaS provider, faced challenges in generating a consistent flow of qualified leads. Their existing lead generation funnel was inefficient and costly.',
     solution: 'Our team revamped their content marketing strategy by creating high-value downloadable assets (eBooks, whitepapers), optimizing landing pages for conversion, and implementing a sophisticated email nurturing sequence. We also utilized LinkedIn Ads for targeted B2B outreach.',
     results: [
@@ -190,3 +191,5 @@ export const blogPostsData: BlogPost[] = [
     tags: ['Data Analytics', 'Marketing Strategy', 'KPIs', 'Optimization'],
   },
 ];
+
+    
