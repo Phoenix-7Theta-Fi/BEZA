@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -17,12 +18,12 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       {post.imageUrl && (
         <Link href={`/blog/${post.slug}`} className="block aspect-video overflow-hidden group">
           <Image
-            src={post.imageUrl}
+            src={post.imageUrl} // Will use placehold.co from data.ts
             alt={post.title}
             width={600}
             height={338} // 16:9 aspect ratio
             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-            data-ai-hint="blog technology"
+            data-ai-hint={post.imageHint || "blog technology"}
           />
         </Link>
       )}

@@ -1,3 +1,4 @@
+
 import { Container } from '@/components/shared/container';
 import { blogPostsData } from '@/lib/data';
 import { notFound } from 'next/navigation';
@@ -45,7 +46,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const authorInitials = post.author.split(' ').map(n => n[0]).join('').toUpperCase();
-  const avatarKeywords = "author,profile";
+  const avatarKeywords = "author profile"; // Used for data-ai-hint
 
   return (
     <div className="section-padding">
@@ -62,7 +63,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">{post.title}</h1>
             <div className="flex items-center space-x-3 text-sm text-muted-foreground">
               <Avatar className="h-10 w-10">
-                <AvatarImage src={`https://source.unsplash.com/random/100x100?${avatarKeywords}`} alt={post.author} data-ai-hint="author profile" />
+                <AvatarImage src="https://placehold.co/100x100.png" alt={post.author} data-ai-hint={avatarKeywords} />
                 <AvatarFallback>{authorInitials}</AvatarFallback>
               </Avatar>
               <div>
@@ -82,12 +83,12 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
 
           {post.imageUrl && (
             <Image
-              src={post.imageUrl}
+              src={post.imageUrl} // This will come from blogPostsData, now placehold.co
               alt={post.title}
               width={1200}
               height={675}
               className="rounded-lg shadow-lg mb-8 object-cover w-full aspect-video"
-              data-ai-hint="blog cover"
+              data-ai-hint={post.imageHint || "blog cover"}
               priority
             />
           )}

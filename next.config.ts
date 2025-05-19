@@ -13,13 +13,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'source.unsplash.com',
-        pathname: '/random/**', // Made pathname more specific
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        pathname: '/**', // This remains general as redirected paths vary
+        hostname: 'placehold.co', // Ensure placehold.co is whitelisted
+        pathname: '/**',
       }
     ],
   },

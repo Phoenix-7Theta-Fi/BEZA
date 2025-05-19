@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -11,12 +12,12 @@ interface CaseStudyCardProps {
 }
 
 export function CaseStudyCard({ study }: CaseStudyCardProps) {
-  const imageHint = `${study.industry.split(' ')[0].toLowerCase()} success`;
+  const imageHint = study.imageHint || `${study.industry.split(' ')[0].toLowerCase()} success`;
   return (
     <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full transform hover:-translate-y-1 hover:border-accent border border-transparent">
       <div className="aspect-video overflow-hidden group">
         <Image
-          src={study.imageUrl}
+          src={study.imageUrl} // Will use placehold.co from data.ts
           alt={study.title}
           width={600}
           height={338} // 16:9 aspect ratio for 600 width

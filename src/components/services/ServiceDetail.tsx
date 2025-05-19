@@ -1,3 +1,4 @@
+
 import type { Service } from '@/lib/data';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,7 +12,8 @@ interface ServiceDetailProps {
 
 export function ServiceDetail({ service }: ServiceDetailProps) {
   const imageHint = `${service.slug.split('-')[0]} concept`;
-  const unsplashKeywords = imageHint.replace(/\s+/g, ',');
+  // Using placehold.co now
+  const placeholderImageUrl = `https://placehold.co/600x400.png`;
 
   return (
     <div className="space-y-12">
@@ -27,7 +29,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
         <div className="overflow-hidden rounded-lg shadow-xl">
           <Image 
-            src={`https://source.unsplash.com/random/600x400?${unsplashKeywords}`}
+            src={placeholderImageUrl}
             alt={service.title} 
             width={600} 
             height={400}
@@ -61,7 +63,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <CardTitle className="text-xl">Our Process</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            {service.process.map((item, index) => (
+            {service.process.map((item, index)_ => (
               <div key={index} className="p-4 border rounded-md bg-background hover:shadow-md transition-all hover:border-accent/50 hover:bg-accent/5">
                 <h4 className="font-semibold text-accent">{index + 1}. {item.step}</h4>
                 <p className="text-sm text-muted-foreground mt-1">{item.description}</p>

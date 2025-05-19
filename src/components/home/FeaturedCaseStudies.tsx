@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -7,24 +8,10 @@ import { Container } from '@/components/shared/container';
 import type { CaseStudy } from '@/lib/data'; 
 import { ArrowRight } from 'lucide-react';
 
-const featuredCaseStudiesData: Pick<CaseStudy, 'title' | 'clientName' | 'imageUrl' | 'summary' | 'slug' | 'industry'>[] = [
-  {
-    title: 'Boosting E-commerce Sales by 150%',
-    clientName: 'FashionRetail Co.',
-    industry: 'E-commerce',
-    imageUrl: 'https://source.unsplash.com/random/600x400?ecommerce,sales',
-    summary: 'Implemented a targeted ad campaign and SEO strategy that significantly increased online sales and brand visibility.',
-    slug: 'ecommerce-sales-boost',
-  },
-  {
-    title: 'Tripling Lead Generation for SaaS',
-    clientName: 'TechSolutions Inc.',
-    industry: 'SaaS',
-    imageUrl: 'https://source.unsplash.com/random/600x400?saas,leads',
-    summary: 'Revamped content marketing and lead nurturing funnels, resulting in a 3x increase in qualified leads.',
-    slug: 'saas-lead-generation',
-  },
-];
+// Using the main caseStudiesData which now uses placehold.co
+import { caseStudiesData } from '@/lib/data'; 
+
+const featuredCaseStudiesData = caseStudiesData.slice(0, 2); // Take first two for featured section
 
 export function FeaturedCaseStudies() {
   return (
@@ -35,12 +22,12 @@ export function FeaturedCaseStudies() {
         </SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {featuredCaseStudiesData.map((study) => {
-            const imageHint = `${study.industry.toLowerCase()} success`;
+            const imageHint = study.imageHint || `${study.industry.toLowerCase()} success`;
             return (
-              <Card key={study.title} className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-accent border border-transparent">
+              <Card key={study.id} className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col transform hover:-translate-y-1 hover:border-accent border border-transparent">
                 <div className="aspect-video overflow-hidden group">
                   <Image
-                    src={study.imageUrl}
+                    src={study.imageUrl} // This will be from placehold.co via caseStudiesData
                     alt={study.title}
                     width={600}
                     height={338}

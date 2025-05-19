@@ -1,3 +1,4 @@
+
 import { Container } from '@/components/shared/container';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { caseStudiesData } from '@/lib/data';
@@ -45,7 +46,8 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
     notFound();
   }
   
-  const imageHint = `${study.industry.split(' ')[0].toLowerCase()} results`;
+  // Using the imageHint from data.ts, which is now static
+  const imageHint = study.imageHint || `${study.industry.split(' ')[0].toLowerCase()} results`;
 
   return (
     <div className="section-padding">
@@ -72,7 +74,7 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
           </header>
 
           <Image
-            src={study.imageUrl}
+            src={study.imageUrl} // This will come from caseStudiesData, now placehold.co
             alt={study.title}
             width={1200}
             height={675} // 16:9 aspect ratio
