@@ -11,14 +11,14 @@ const featuredCaseStudiesData: Pick<CaseStudy, 'title' | 'clientName' | 'imageUr
   {
     title: 'Boosting E-commerce Sales by 150%',
     clientName: 'FashionRetail Co.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?ecommerce,sales',
     summary: 'Implemented a targeted ad campaign and SEO strategy that significantly increased online sales and brand visibility.',
     slug: 'ecommerce-sales-boost',
   },
   {
     title: 'Tripling Lead Generation for SaaS',
     clientName: 'TechSolutions Inc.',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?saas,leads',
     summary: 'Revamped content marketing and lead nurturing funnels, resulting in a 3x increase in qualified leads.',
     slug: 'saas-lead-generation',
   },

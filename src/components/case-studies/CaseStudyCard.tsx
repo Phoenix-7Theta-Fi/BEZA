@@ -10,6 +10,7 @@ interface CaseStudyCardProps {
 }
 
 export function CaseStudyCard({ study }: CaseStudyCardProps) {
+  const imageHint = `${study.industry.split(' ')[0].toLowerCase()} success`;
   return (
     <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
       <div className="aspect-video overflow-hidden">
@@ -19,7 +20,7 @@ export function CaseStudyCard({ study }: CaseStudyCardProps) {
           width={600}
           height={338} // 16:9 aspect ratio for 600 width
           className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-          data-ai-hint={`${study.industry.toLowerCase()} business success`}
+          data-ai-hint={imageHint}
         />
       </div>
       <CardHeader>

@@ -114,7 +114,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Boosting E-commerce Sales by 150% for FashionRetail Co.',
     clientName: 'FashionRetail Co.',
     industry: 'E-commerce / Fashion',
-    imageUrl: 'https://placehold.co/800x450.png',
+    imageUrl: 'https://source.unsplash.com/random/800x450?ecommerce,fashion,success',
     challenge: 'FashionRetail Co. was struggling with stagnant online sales and low brand visibility in a competitive market. Their previous marketing efforts lacked clear direction and ROI.',
     solution: 'BEZA developed a multi-channel strategy focusing on SEO optimization for their e-commerce platform, targeted social media advertising campaigns (Facebook & Instagram), and compelling content marketing. We also implemented a conversion rate optimization (CRO) plan for their product pages.',
     results: [
@@ -132,7 +132,7 @@ export const caseStudiesData: CaseStudy[] = [
     title: 'Tripling Qualified Leads for TechSolutions Inc.',
     clientName: 'TechSolutions Inc.',
     industry: 'SaaS / B2B Technology',
-    imageUrl: 'https://placehold.co/800x450.png',
+    imageUrl: 'https://source.unsplash.com/random/800x450?saas,technology,success',
     challenge: 'TechSolutions Inc., a B2B SaaS provider, faced challenges in generating a consistent flow of qualified leads. Their existing lead generation funnel was inefficient and costly.',
     solution: 'Our team revamped their content marketing strategy by creating high-value downloadable assets (eBooks, whitepapers), optimizing landing pages for conversion, and implementing a sophisticated email nurturing sequence. We also utilized LinkedIn Ads for targeted B2B outreach.',
     results: [
@@ -153,7 +153,7 @@ export const blogPostsData: BlogPost[] = [
     title: 'The Future of Digital Marketing: Trends to Watch in 2024',
     author: 'Jane Doe, Head of Strategy @ BEZA',
     date: '2024-01-15T10:00:00Z',
-    imageUrl: 'https://placehold.co/800x400.png',
+    imageUrl: 'https://source.unsplash.com/random/800x400?marketing,trends',
     excerpt: 'Digital marketing is constantly evolving. Discover the key trends that will shape the landscape in 2024 and how your business can prepare for success.',
     content: `
 <p>The digital marketing landscape is a whirlwind of change, and 2024 is no exception. Staying ahead of the curve is crucial for businesses looking to thrive. Here are some of the top trends we're watching at BEZA:</p>
@@ -173,7 +173,7 @@ export const blogPostsData: BlogPost[] = [
     title: 'Unlocking the Power of Data Analytics in Your Marketing',
     author: 'John Smith, Data Lead @ BEZA',
     date: '2024-02-20T14:30:00Z',
-    imageUrl: 'https://placehold.co/800x400.png',
+    imageUrl: 'https://source.unsplash.com/random/800x400?data,analytics',
     excerpt: 'Data is more than just numbers; it\'s the key to understanding your customers and optimizing your campaigns. Learn how to effectively use data analytics.',
     content: `
 <p>In today's competitive environment, making decisions based on gut feelings is a recipe for disaster. Data analytics provides the clarity and insight needed to make informed marketing choices. Here’s how you can unlock its power:</p>

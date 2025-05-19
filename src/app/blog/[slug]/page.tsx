@@ -45,6 +45,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const authorInitials = post.author.split(' ').map(n => n[0]).join('').toUpperCase();
+  const avatarKeywords = "author,profile";
 
   return (
     <div className="section-padding">
@@ -61,7 +62,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">{post.title}</h1>
             <div className="flex items-center space-x-3 text-sm text-muted-foreground">
               <Avatar className="h-10 w-10">
-                <AvatarImage src={`https://placehold.co/100x100.png?text=${authorInitials}`} alt={post.author} data-ai-hint="author profile" />
+                <AvatarImage src={`https://source.unsplash.com/random/100x100?${avatarKeywords}`} alt={post.author} data-ai-hint="author profile" />
                 <AvatarFallback>{authorInitials}</AvatarFallback>
               </Avatar>
               <div>
@@ -86,7 +87,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
               width={1200}
               height={675}
               className="rounded-lg shadow-lg mb-8 object-cover w-full aspect-video"
-              data-ai-hint="blog post cover"
+              data-ai-hint="blog cover"
               priority
             />
           )}

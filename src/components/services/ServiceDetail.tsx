@@ -10,6 +10,9 @@ interface ServiceDetailProps {
 }
 
 export function ServiceDetail({ service }: ServiceDetailProps) {
+  const imageHint = `${service.slug.split('-')[0]} concept`;
+  const unsplashKeywords = imageHint.replace(/\s+/g, ',');
+
   return (
     <div className="space-y-12">
       <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -24,12 +27,12 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
         <div>
           <Image 
-            src={`https://placehold.co/600x400.png`} // Generic placeholder
+            src={`https://source.unsplash.com/random/600x400?${unsplashKeywords}`}
             alt={service.title} 
             width={600} 
             height={400}
             className="rounded-lg shadow-xl object-cover"
-            data-ai-hint={`${service.slug.replace('-', ' ')} concept`}
+            data-ai-hint={imageHint}
           />
         </div>
       </div>

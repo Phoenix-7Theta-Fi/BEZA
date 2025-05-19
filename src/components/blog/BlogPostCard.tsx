@@ -21,7 +21,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             width={600}
             height={338} // 16:9 aspect ratio
             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-            data-ai-hint="blog article technology"
+            data-ai-hint="blog technology"
           />
         </Link>
       )}

@@ -44,6 +44,8 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
   if (!study) {
     notFound();
   }
+  
+  const imageHint = `${study.industry.split(' ')[0].toLowerCase()} results`;
 
   return (
     <div className="section-padding">
@@ -75,7 +77,7 @@ export default function SingleCaseStudyPage({ params }: CaseStudyPageProps) {
             width={1200}
             height={675} // 16:9 aspect ratio
             className="rounded-lg shadow-xl mb-12 object-cover w-full max-h-[500px]"
-            data-ai-hint={`${study.industry.toLowerCase()} project results`}
+            data-ai-hint={imageHint}
             priority
           />
 

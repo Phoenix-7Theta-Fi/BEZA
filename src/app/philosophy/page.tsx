@@ -31,7 +31,7 @@ const philosophyDetails: PhilosophyDetail[] = [
       "A strong foundation ensures that all subsequent marketing efforts are aligned, effective, and sustainable.",
       "Think of it as architecting a skyscraper – meticulous planning and strong materials are essential before you can build upwards."
     ],
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?construction,blueprint',
     imageAlt: 'Illustration of building blocks or architectural plans',
     dataAiHint: 'construction blueprint'
   },
@@ -46,7 +46,7 @@ const philosophyDetails: PhilosophyDetail[] = [
       "The goal is to spark genuine interest, encourage interaction, and build a loyal community around your brand.",
       "Engagement is a two-way street; we listen to your audience to refine our approach continually."
     ],
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?social,media',
     imageAlt: 'Illustration of people interacting or social media icons',
     dataAiHint: 'social media'
   },
@@ -61,7 +61,7 @@ const philosophyDetails: PhilosophyDetail[] = [
       "By zooming into the data, we uncover actionable insights that allow us to optimize strategies, improve ROI, and make informed decisions.",
       "We transform raw data into a clear roadmap for refinement and growth."
     ],
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?data,charts',
     imageAlt: 'Illustration of data charts and analytics dashboards',
     dataAiHint: 'data charts'
   },
@@ -76,7 +76,7 @@ const philosophyDetails: PhilosophyDetail[] = [
       "Amplification is about maximizing your return on investment and achieving exponential growth for your brand.",
       "We ensure your message reaches further, resonates deeper, and converts more effectively."
     ],
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://source.unsplash.com/random/600x400?growth,graph',
     imageAlt: 'Illustration of a megaphone or upward trending graph',
     dataAiHint: 'growth graph'
   },
