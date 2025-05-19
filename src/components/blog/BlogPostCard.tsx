@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import type { BlogPost } from '@/lib/data';
 import { format } from 'date-fns';
 import { Badge } from '@/components/ui/badge';
+import { ArrowRight } from 'lucide-react';
 
 interface BlogPostCardProps {
   post: BlogPost;
@@ -12,9 +13,9 @@ interface BlogPostCardProps {
 
 export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
-    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden flex flex-col h-full transform hover:-translate-y-1">
+    <Card className="shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full transform hover:-translate-y-1 hover:border-accent border border-transparent">
       {post.imageUrl && (
-        <Link href={`/blog/${post.slug}`} className="block aspect-video overflow-hidden">
+        <Link href={`/blog/${post.slug}`} className="block aspect-video overflow-hidden group">
           <Image
             src={post.imageUrl}
             alt={post.title}
@@ -27,7 +28,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       )}
       <CardHeader>
         <Link href={`/blog/${post.slug}`}>
-          <CardTitle className="text-xl leading-tight hover:text-primary transition-colors">{post.title}</CardTitle>
+          <CardTitle className="text-xl leading-tight hover:text-accent transition-colors">{post.title}</CardTitle>
         </Link>
         <CardDescription className="text-sm text-muted-foreground">
           By {post.author} on {format(new Date(post.date), 'MMMM d, yyyy')}
@@ -38,14 +39,16 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
         {post.tags && post.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-2">
             {post.tags.slice(0, 3).map(tag => ( // Show max 3 tags
-              <Badge key={tag} variant="secondary" className="text-xs">{tag}</Badge>
+              <Badge key={tag} variant="secondary" className="text-xs hover:bg-accent/20 hover:text-accent transition-colors">{tag}</Badge>
             ))}
           </div>
         )}
       </CardContent>
       <CardFooter>
-        <Button asChild variant="link" className="text-primary p-0 h-auto">
-          <Link href={`/blog/${post.slug}`}>Read More &rarr;</Link>
+        <Button asChild variant="outline" size="sm" className="group">
+          <Link href={`/blog/${post.slug}`}>
+            Read More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </Button>
       </CardFooter>
     </Card>

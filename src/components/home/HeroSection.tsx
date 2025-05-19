@@ -15,13 +15,13 @@ export function HeroSection() {
           We craft bespoke digital marketing strategies that <span className="font-semibold text-foreground">Build</span> your brand, <span className="font-semibold text-foreground">Engage</span> your audience, <span className="font-semibold text-foreground">Zoom</span> into data, and <span className="font-semibold text-foreground">Amplify</span> your success.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-          <Button asChild size="lg" className="shadow-lg hover:shadow-xl transform hover:scale-105">
+          <Button asChild size="lg" className="shadow-lg hover:shadow-xl group">
             <Link href="/contact">
               Start Your Journey
-              <ChevronRight className="ml-2 h-5 w-5" />
+              <ChevronRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </Button>
-          <Button asChild variant="outline" size="lg" className="shadow-sm hover:shadow-md transform hover:scale-105">
+          <Button asChild variant="outline" size="lg" className="shadow-sm hover:shadow-md group">
             <Link href="/philosophy">
               Learn Our Method
             </Link>

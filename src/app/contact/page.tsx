@@ -50,13 +50,13 @@ export default function ContactPage() {
               Prefer to reach out directly? Here are other ways to connect with the BEZA team.
             </p>
             {contactDetails.map(({ Icon, title, value, href }) => (
-              <div key={title} className="flex items-start space-x-4">
+              <div key={title} className="flex items-start space-x-4 group">
                 <div className="flex-shrink-0 mt-1">
-                  <Icon className="h-6 w-6 text-primary" />
+                  <Icon className="h-6 w-6 text-accent group-hover:scale-110 transition-transform" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">{title}</h4>
-                  <a href={href} className="text-muted-foreground hover:text-primary transition-colors">
+                  <a href={href} className="text-muted-foreground hover:text-accent transition-colors">
                     {value}
                   </a>
                 </div>

@@ -74,7 +74,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
             {post.tags && post.tags.length > 0 && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {post.tags.map(tag => (
-                  <Badge key={tag} variant="secondary">{tag}</Badge>
+                  <Badge key={tag} variant="secondary" className="hover:bg-accent/20 hover:text-accent transition-colors">{tag}</Badge>
                 ))}
               </div>
             )}
@@ -93,7 +93,7 @@ export default function SingleBlogPostPage({ params }: BlogPostPageProps) {
           )}
           
           <div 
-            className="prose prose-lg max-w-none dark:prose-invert text-foreground prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/80 prose-strong:text-foreground"
+            className="prose prose-lg max-w-none dark:prose-invert text-foreground prose-headings:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-strong:text-foreground"
             dangerouslySetInnerHTML={{ __html: post.content }} 
           />
           

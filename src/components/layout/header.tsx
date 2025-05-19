@@ -36,8 +36,8 @@ export function Header() {
     <Link
       href={href}
       className={cn(
-        'px-3 py-2 rounded-md text-sm font-medium hover:text-primary hover:bg-primary-foreground/10',
-        pathname === href ? 'text-primary font-semibold' : 'text-foreground/80'
+        'px-3 py-2 rounded-md text-sm font-medium transition-colors duration-150 ease-in-out hover:text-accent hover:bg-accent/10',
+        pathname === href ? 'text-accent font-semibold bg-accent/10' : 'text-foreground/80'
       )}
       onClick={() => setIsSheetOpen(false)}
     >
@@ -51,8 +51,8 @@ export function Header() {
       isScrolled ? "bg-background/80 backdrop-blur-lg shadow-md border-b" : "bg-transparent"
     )}>
       <Container className="flex h-20 items-center justify-between">
-        <Link href="/" aria-label="BEZA Home">
-          <BezaLogo className="h-10 w-auto" />
+        <Link href="/" aria-label="BEZA Home" className="group">
+          <BezaLogo className="h-10 w-auto group-hover:scale-105 transition-transform" />
         </Link>
         <nav className="hidden md:flex items-center space-x-1">
           {navLinks.map((link) => (
@@ -67,7 +67,10 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] bg-background p-6">
-              <div className="flex flex-col space-y-4 mt-6">
+               <Link href="/" aria-label="BEZA Home" className="mb-6 block">
+                <BezaLogo className="h-10 w-auto" />
+              </Link>
+              <div className="flex flex-col space-y-2 mt-6">
                 {navLinks.map((link) => (
                   <NavLink key={link.href} href={link.href} label={link.label} />
                 ))}

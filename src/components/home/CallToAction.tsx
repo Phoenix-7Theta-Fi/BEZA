@@ -13,10 +13,10 @@ export function CallToAction() {
         <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90">
           Let BEZA Digital Compass guide your brand to new heights. Partner with us to build, engage, zoom, and amplify your way to success.
         </p>
-        <Button asChild size="lg" variant="secondary" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl transform hover:scale-105">
+        <Button asChild size="lg" variant="secondary" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg hover:shadow-xl group">
           <Link href="/contact">
             Get Your Free Consultation
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </Button>
       </Container>

@@ -21,7 +21,7 @@ interface PhilosophyDetail {
 
 const philosophyDetails: PhilosophyDetail[] = [
   {
-    icon: <BuildIcon className="h-12 w-12 text-primary" />,
+    icon: <BuildIcon className="h-12 w-12 text-accent" />,
     title: 'Build',
     letter: 'B',
     tagline: 'Crafting Solid Foundations for Digital Success.',
@@ -36,7 +36,7 @@ const philosophyDetails: PhilosophyDetail[] = [
     dataAiHint: 'construction blueprint'
   },
   {
-    icon: <EngageIcon className="h-12 w-12 text-primary" />,
+    icon: <EngageIcon className="h-12 w-12 text-accent" />,
     title: 'Engage',
     letter: 'E',
     tagline: 'Connecting Meaningfully with Your Audience.',
@@ -51,7 +51,7 @@ const philosophyDetails: PhilosophyDetail[] = [
     dataAiHint: 'social media'
   },
   {
-    icon: <ZoomIcon className="h-12 w-12 text-primary" />,
+    icon: <ZoomIcon className="h-12 w-12 text-accent" />,
     title: 'Zoom',
     letter: 'Z',
     tagline: 'Diving Deep into Data for Actionable Insights.',
@@ -66,7 +66,7 @@ const philosophyDetails: PhilosophyDetail[] = [
     dataAiHint: 'data charts'
   },
   {
-    icon: <AmplifyIcon className="h-12 w-12 text-primary" />,
+    icon: <AmplifyIcon className="h-12 w-12 text-accent" />,
     title: 'Amplify',
     letter: 'A',
     tagline: 'Scaling Success and Maximizing Impact.',
@@ -95,14 +95,14 @@ export default function PhilosophyPage() {
 
         <div className="space-y-16 mt-16">
           {philosophyDetails.map((step, index) => (
-            <section key={step.title} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 lg:gap-12`}>
-              <div className="md:w-1/2">
+            <section key={step.title} className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-8 lg:gap-12 group`}>
+              <div className="md:w-1/2 overflow-hidden rounded-lg shadow-xl">
                 <Image
                   src={step.imageUrl}
                   alt={step.imageAlt}
                   width={600}
                   height={400}
-                  className="rounded-lg shadow-xl object-cover w-full aspect-video"
+                  className="object-cover w-full aspect-video group-hover:scale-105 transition-transform duration-300 ease-in-out"
                   data-ai-hint={step.dataAiHint}
                 />
               </div>
@@ -110,7 +110,7 @@ export default function PhilosophyPage() {
                 <div className="flex items-center mb-4">
                   {step.icon}
                   <h3 className="ml-4 text-3xl font-bold text-foreground">
-                    <span className="text-primary">{step.letter}</span> - {step.title}
+                    <span className="text-accent">{step.letter}</span> - {step.title}
                   </h3>
                 </div>
                 <p className="text-xl font-semibold text-muted-foreground mb-4">{step.tagline}</p>

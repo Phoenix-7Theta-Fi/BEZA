@@ -3,10 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Container } from '@/components/shared/container';
-import { Palette, Users, BarChart3, Megaphone } from 'lucide-react';
-import type { Service } from '@/lib/data'; // Assuming Service type is defined in data.ts
+import { Palette, Users, BarChart3, Megaphone, ArrowRight } from 'lucide-react';
+import type { Service } from '@/lib/data'; 
 
-// Simplified mock data for display purposes
 const featuredServicesData: Pick<Service, 'title' | 'shortDescription' | 'iconName' | 'slug'>[] = [
   {
     title: 'Brand Building',
@@ -29,10 +28,10 @@ const featuredServicesData: Pick<Service, 'title' | 'shortDescription' | 'iconNa
 ];
 
 const iconMap: { [key: string]: JSX.Element } = {
-  Palette: <Palette className="h-8 w-8 text-primary" />,
-  Users: <Users className="h-8 w-8 text-primary" />,
-  BarChart3: <BarChart3 className="h-8 w-8 text-primary" />,
-  Megaphone: <Megaphone className="h-8 w-8 text-primary" />,
+  Palette: <Palette className="h-8 w-8 text-accent group-hover:scale-110 transition-transform" />,
+  Users: <Users className="h-8 w-8 text-accent group-hover:scale-110 transition-transform" />,
+  BarChart3: <BarChart3 className="h-8 w-8 text-accent group-hover:scale-110 transition-transform" />,
+  Megaphone: <Megaphone className="h-8 w-8 text-accent group-hover:scale-110 transition-transform" />,
 };
 
 
@@ -45,25 +44,27 @@ export function FeaturedServices() {
         </SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredServicesData.map((service) => (
-            <Card key={service.title} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <Card key={service.title} className="shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col transform hover:-translate-y-1 group hover:border-accent border border-transparent">
               <CardHeader>
-                <div className="mb-4 flex justify-center items-center h-16 w-16 rounded-full bg-primary/10 mx-auto">
-                   {iconMap[service.iconName as keyof typeof iconMap] || <Palette className="h-8 w-8 text-primary" />}
+                <div className="mb-4 flex justify-center items-center h-16 w-16 rounded-full bg-accent/10 mx-auto">
+                   {iconMap[service.iconName as keyof typeof iconMap] || <Palette className="h-8 w-8 text-accent group-hover:scale-110 transition-transform" />}
                 </div>
-                <CardTitle className="text-center text-xl">{service.title}</CardTitle>
+                <CardTitle className="text-center text-xl group-hover:text-accent transition-colors">{service.title}</CardTitle>
               </CardHeader>
               <CardContent className="flex-grow">
                 <CardDescription className="text-center text-muted-foreground mb-4">{service.shortDescription}</CardDescription>
-                 <Button asChild variant="link" className="w-full text-primary">
-                  <Link href={`/services/${service.slug}`}>Learn More &rarr;</Link>
+                 <Button asChild variant="outline" size="sm" className="w-full group/button">
+                  <Link href={`/services/${service.slug}`}>
+                    Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover/button:translate-x-1 transition-transform" />
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
           ))}
         </div>
         <div className="text-center mt-12">
-          <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md">
-            <Link href="/services">View All Services</Link>
+          <Button asChild size="lg" variant="outline" className="shadow-sm hover:shadow-md group">
+            <Link href="/services">View All Services <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" /></Link>
           </Button>
         </div>
       </Container>
