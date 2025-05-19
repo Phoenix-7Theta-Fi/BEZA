@@ -14,19 +14,15 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'source.unsplash.com',
-        port: '',
-        pathname: '/**',
+        pathname: '/random/**', // Made pathname more specific
       },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
+        pathname: '/**', // This remains general as redirected paths vary
       }
     ],
   },
 };
 
 export default nextConfig;
-
-    
